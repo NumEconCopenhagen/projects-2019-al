@@ -16,4 +16,4 @@ import numpy as np
 #Here we import the CO2 database from OECD
 df = pdr.DataReader("AIR_GHG","oecd")
 type(df)
-#something has gone wrong here. the data is here but it is a mess
+#something has gone wrong here. the data is here but it is a mess :(
