@@ -18,7 +18,11 @@ import numpy as np
 
 #Here we import the CO2 database from OECD
 df = pdr.DataReader("AIR_GHG","oecd")
+df.reset_index()
+dir(df.index)
+df.columns = [' '.join(col).strip() for col in df.columns.values]
 
+df.head
 #If we look at the data, we can se that it has the dimensions 7 rows X 8460 columns. This is clearly wrong. I have tried to transpose it, but it only fucks it up more
 #The main problem is that i cannot access the "Coutry" - what i have done is to import a list of the countries manually from OECD, and used it to for-loop over
 countries = ["Australia","Austria","Belgium","Canada","Chile","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland",	
