@@ -49,7 +49,5 @@ data.set_index(data["year"])
 # x = pd.DataFrame(x)
 # print(x)
 
-
-#Here we import data from the cato institute. The data is not availeble via an api, and is therefore in the downloaded and part of the resporitpory
-
-test = pd.read_csv("human-freedom-index-data-update-csv")
+#Here we import average income per capita data
+dc = pdr.DataReader("AV_AN_WAGE","oecd")
