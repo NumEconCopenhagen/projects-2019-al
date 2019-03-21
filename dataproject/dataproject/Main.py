@@ -8,7 +8,6 @@
 #importing packeges
 import pip 
 import pandas as pd
-#if you don't have pandas_datareader installed write: "pip install pandas_datareader" without quotes in the terminal
 import pandas_datareader as pdr
 import numpy as np
 
@@ -18,38 +17,28 @@ import numpy as np
 
 #Here we import the CO2 database from OECD
 df = pdr.DataReader("AIR_GHG","oecd")
+
+#the data is in "multi-index form", these codes turns it into a more common non-hieracical structure
 df.reset_index()
 dir(df.index)
 df.columns = [' '.join(col).strip() for col in df.columns.values]
 
-df.head
-#If we look at the data, we can se that it has the dimensions 7 rows X 8460 columns. This is clearly wrong. I have tried to transpose it, but it only fucks it up more
-#The main problem is that i cannot access the "Coutry" - what i have done is to import a list of the countries manually from OECD, and used it to for-loop over
+#The countries are not "availeble to grap" so i have manually made a list using excel
 countries = ["Australia","Austria","Belgium","Canada","Chile","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland",	
     "Ireland","Israel","Italy","Japan","Korea","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic",
     "Slovenia","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States","OECD - Europe","OECD - Total","Argentina","Brazil","China (People's Republic of)",
     "Colombia","Costa Rica","India","Indonesia","Russia","South Africa"]
 
-#I make a dataframe of with the country names, years and space for co2 emissions
-data = []
+# I initiate an empty list for the dataset and set the counter to 0
+x = []
+i = 0
 for c in countries:
-    for y in df.index.values:
-        data.append({"country" : c,"year": y})
+    for y in df.index.values : 
+        x.append({"country" : c,"year": y,"Total emissions of GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
+        i = i + 1 
+        if i > 6 :
+            i = 0
 
-data = pd.DataFrame(data)
-co2 = []
-data = data.append({"co2_omission" : co2},ignore_index=True)
-data.drop(data.tail(1).index,inplace=True)
-data.set_index(data["year"])
-
-#i want to add the co2 emissions, but it is rather hard for me. 
-# they can be acessed via: df["Australia"]["Greenhouse gases"]["Total  emissions including LULUCF"].iloc[[0,1,2,3,4,5,6]]
-####     NOT DONE!#####
-# x = []
-# for c in data["country"]:
-#     for i in df[c]["Greenhouse gases"]["Total  emissions including LULUCF"].index.values:
-#         x.append({"country" : c, "co2_emissions": df[c]["Greenhouse gases"]["Total  emissions including LULUCF"][i]})  
-
-# x = pd.DataFrame(x)
-# print(x)
-
+#In the for-loop i make a row for each country for each year, and insert a country, a year and the corrosponding of emissions of GHG (Green House Gases)
+df_env = pd.DataFrame(x)
+print(df_env)
