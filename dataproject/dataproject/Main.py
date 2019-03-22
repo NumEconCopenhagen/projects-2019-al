@@ -50,5 +50,5 @@ data.set_index(data["year"])
 # print(x)
 
 #Here we import average income per capita data
-dc = pdr.DataReader("AV_AN_WAGE","oecd")
-#try to commit again
+c = 2 +2
+print(c)
