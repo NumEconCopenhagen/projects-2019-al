@@ -52,6 +52,8 @@ data.set_index(data["year"])
 #Here we import average income per capita data
 data_wages= pd.read_csv("oecdwages.csv")
 #drop column that we do not need
-drop_these= ["INDICATOR","FREQUENCY","MEASURE","Flag Codes"]
-data_wages.drop(drop_these, axis=1, inplace=False)
-data_wages.head()
+drop_these= ["INDICATOR","FREQUENCY","MEASURE","SUBJECT", "Flag Codes"]
+empl.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=False)
+copy = data_wages.drop(drop_these, axis=1, inplace=False)
+copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
+copy.head(10)
