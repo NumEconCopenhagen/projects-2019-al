@@ -50,5 +50,7 @@ data.set_index(data["year"])
 # print(x)
 
 #Here we import average income per capita data
-c = 2 +2
-print(c)
+data_wages= pd.read_csv("oecdwages.csv")
+drop_these= ["INDICATOR","FREQUENCY","MEASURE","Flag Codes"]
+data_wages.drop(drop_these, axis=1, inplace=False)
+data_wages.head()
