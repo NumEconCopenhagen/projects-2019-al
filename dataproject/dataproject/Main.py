@@ -52,4 +52,17 @@ data.set_index(data["year"])
 
 #Here we import data from the cato institute. The data is not availeble via an api, and is therefore in the downloaded and part of the resporitpory
 
-test = pd.read_csv("human-freedom-index-data-update-csv")
+dc = pdr.DataReader("AV_AN_WAGE","oecd")
+
+dc.head()
+dc.shape
+
+data_wages= pd.read_csv("oecdwages.csv")
+
+data_wages.head(10)
+data_wages.shape
+data_wages[["TIME"]]
+data_wages[["AUS"]]
+drop_these= ["INDICATOR","FREQUENCY","MEASURE","Flag Codes"]
+data_wages.drop(drop_these, axis=1, inplace=False)
+data_wages.head()
