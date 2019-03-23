@@ -52,17 +52,19 @@ data.set_index(data["year"])
 
 #Here we import data from the cato institute. The data is not availeble via an api, and is therefore in the downloaded and part of the resporitpory
 
-dc = pdr.DataReader("AV_AN_WAGE","oecd")
 
-dc.head()
-dc.shape
 
 data_wages= pd.read_csv("oecdwages.csv")
 
-data_wages.head(10)
-data_wages.shape
-data_wages[["TIME"]]
-data_wages[["AUS"]]
-drop_these= ["INDICATOR","FREQUENCY","MEASURE","Flag Codes"]
-data_wages.drop(drop_these, axis=1, inplace=False)
-data_wages.head()
+#drop column that we do not need
+drop_these= ["INDICATOR","FREQUENCY","MEASURE","SUBJECT", "Flag Codes"]
+copy = data_wages.drop(drop_these, axis=1, inplace=False)
+copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
+copy.head(10)
+copy.loc[copy.Country == 'AUS']
+
+copy.head(10)
+copy.loc[:,['Country']]
+copy.loc
+copy.head()
+copy.loc[copy["Year"]==2010,:]
