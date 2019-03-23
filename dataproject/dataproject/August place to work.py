@@ -48,13 +48,18 @@ data_wages= pd.read_csv("oecdwages.csv")
 #drop column that we do not need
 drop_these= ["INDICATOR","FREQUENCY","MEASURE","SUBJECT", "Flag Codes"]
 copy = data_wages.drop(drop_these, axis=1, inplace=False)
-copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
+copy.rename(columns = {'LOCATION':'Countrycode', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
 copy.head(10)
 copy.loc[copy.Country == 'AUS']
 c = copy["Country"].unique()
 
-test = pd.read_csv("countries.csv",sep=";",)
+
+#getting countrycodes from online source
+cc = pd.read_csv("https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv",index_col=False)
+
+for i in copy.index.values :
+    copy["Country"][i] = cc[copy["Countrycode"][i]==cc["alpha-3"]]["name"]
 
 
-x = df_env[df_env["country"]=="Australia"]
-x[df_env["year"]=="2010-01-01"]
+
+test = pd.merge()
