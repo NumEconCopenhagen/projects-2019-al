@@ -52,3 +52,5 @@ copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 
 copy.head(10)
 copy.loc[copy.Country == 'AUS']
 c = copy["Country"].unique()
+
+test = pd.read_csv("c and cc.csv")
