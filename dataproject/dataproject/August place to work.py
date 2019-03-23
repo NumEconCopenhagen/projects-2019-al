@@ -57,9 +57,8 @@ c = copy["Country"].unique()
 #getting countrycodes from online source
 cc = pd.read_csv("https://raw.githubusercontent.com/lukes/ISO-3166-Countries-with-Regional-Codes/master/all/all.csv",index_col=False)
 
-for i in copy.index.values :
-    copy["Country"][i] = cc[copy["Countrycode"][i]==cc["alpha-3"]]["name"]
-
+for i in copy.index.values
+    copy["Country"][i] = cc[copy["Countrycode"][i]==cc["alpha-3"]]["name"].item()
+copy
 #next step is to delete the letters from the country names, and to merge the two datasets
-
-test = pd.merge()
+i = 0
