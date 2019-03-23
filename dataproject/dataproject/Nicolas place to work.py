@@ -52,7 +52,6 @@ copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 
 copy.head(10)
 copy.loc[copy.Year == '2010']
 copy.loc[copy.Country == 'AUS']
-copy.loc['Year'==é]
 copy.loc[0]
 c = copy["Country"].unique()
 len(c)
