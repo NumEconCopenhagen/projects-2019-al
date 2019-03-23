@@ -53,7 +53,8 @@ copy.head(10)
 copy.loc[copy.Country == 'AUS']
 c = copy["Country"].unique()
 
-test = pd.read_csv("c and cc.csv")
+test = pd.read_csv("countries.csv",sep=";",)
+
 
 x = df_env[df_env["country"]=="Australia"]
 x[df_env["year"]=="2010-01-01"]
