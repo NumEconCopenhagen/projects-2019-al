@@ -25,9 +25,9 @@ df.columns = [' '.join(col).strip() for col in df.columns.values]
 
 #The countries are not "availeble to grap" so i have manually made a list using excel
 countries = ["Australia","Austria","Belgium","Canada","Chile","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland",	
-    "Ireland","Israel","Italy","Japan","Korea","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic",
-    "Slovenia","Spain","Sweden","Switzerland","United Kingdom","United States"]	
-
+    "Ireland","Israel","Italy","Japan","Korea","LatPvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic",
+    "Slovenia","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States","OECD - Europe","OECD - Total","Argentina","Brazil","China (People's Republic of)",
+    "Colombia","Costa Rica","India","Indonesia","Russia","South Africa"]
 
 # I initiate an empty list for the dataset and set the counter to 0
 x = []
@@ -52,9 +52,3 @@ copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 
 copy.head(10)
 copy.loc[copy.Country == 'AUS']
 c = copy["Country"].unique()
-
-test = pd.read_csv("countries.csv",sep=";",)
-
-
-x = df_env[df_env["country"]=="Australia"]
-x[df_env["year"]=="2010-01-01"]
