@@ -42,16 +42,3 @@ for c in countries:
 #In the for-loop i make a row for each country for each year, and insert a country, a year and the corrosponding of emissions of GHG (Green House Gases)
 df_env = pd.DataFrame(x)
 print(df_env)
-
-#Here we import average income per capita data
-data_wages= pd.read_csv("oecdwages.csv")
-#drop column that we do not need
-drop_these= ["INDICATOR","FREQUENCY","MEASURE","SUBJECT", "Flag Codes"]
-copy = data_wages.drop(drop_these, axis=1, inplace=False)
-copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
-copy.head(10)
-copy.loc[copy.Country == 'AUS']
-c = copy["Country"].unique()
-s = df_env["country"].unique()
-c.sort()
-
