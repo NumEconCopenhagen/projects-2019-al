@@ -57,3 +57,4 @@ copy = data_wages.drop(drop_these, axis=1, inplace=False)
 copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
 copy.head(10)
 copy.loc[copy.Country == 'AUS']
+c = copy["Country"].unique()
