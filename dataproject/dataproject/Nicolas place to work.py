@@ -26,8 +26,8 @@ df.columns = [' '.join(col).strip() for col in df.columns.values]
 #The countries are not "availeble to grap" so i have manually made a list using excel
 countries = ["Australia","Austria","Belgium","Canada","Chile","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland",	
     "Ireland","Israel","Italy","Japan","Korea","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic",
-    "Slovenia","Spain","Sweden","Switzerland","United Kingdom","United States"]	
-
+    "Slovenia","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States","OECD - Europe","OECD - Total","Argentina","Brazil","China (People's Republic of)",
+    "Colombia","Costa Rica","India","Indonesia","Russia","South Africa"]
 
 # I initiate an empty list for the dataset and set the counter to 0
 x = []
@@ -50,11 +50,27 @@ drop_these= ["INDICATOR","FREQUENCY","MEASURE","SUBJECT", "Flag Codes"]
 copy = data_wages.drop(drop_these, axis=1, inplace=False)
 copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
 copy.head(10)
+copy.loc[copy.Year == '2010']
 copy.loc[copy.Country == 'AUS']
+copy.loc['Year'==é]
+copy.loc[0]
 c = copy["Country"].unique()
+len(c)
+s = df_env["country"].unique()
 
-test = pd.read_csv("countries.csv",sep=";",)
+copy = data_wages.set_index('Country')
+copy.loc[0]
+
+x = copy[copy["Country"] == "AUS"]
+x[copy["Year"] == 2010]
 
 
-x = df_env[df_env["country"]=="Australia"]
-x[df_env["year"]=="2010-01-01"]
+def average_wage(a,b=True) :
+    c = copy[copy["Country"] == a]
+    if b == True : 
+        return c
+    else : 
+        return c[copy["Year"] == b]
+
+average_wage('AUS', 2010)
+average_wage('FRA')
