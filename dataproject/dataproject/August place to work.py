@@ -60,6 +60,6 @@ cc = pd.read_csv("https://raw.githubusercontent.com/lukes/ISO-3166-Countries-wit
 for i in copy.index.values :
     copy["Country"][i] = cc[copy["Countrycode"][i]==cc["alpha-3"]]["name"]
 
-
+#next step is to delete the letters from the country names, and to merge the two datasets
 
 test = pd.merge()
