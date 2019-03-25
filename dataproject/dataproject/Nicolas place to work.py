@@ -83,6 +83,30 @@ plt.show()
 
 ### functions book :
 
+#The translate function
+def translate(code = True, country = True) :
+    i = 0
+    if country == True :
+        for a in countrycode :
+            if code != countrycode[i] and i < 35 :
+                i = i + 1
+            elif code == countrycode[i] :
+                return countries[i]
+            else :
+                return "miss spelling of the code"
+    elif code == True :
+        for a in countries :
+            if country != countries[i] and i < 35 :
+                i = i + 1
+            elif country == countries[i] :
+                return countrycode[i]
+            else :
+                return "miss spelling of the country"
+    else :
+        return "You must precise code or country"
+
+translate(country = 'Canadas')
+
 #The information function
 def information(a,b = 0,variable = True) :
     """ This function take two arguments, the country code and the year and return the name of the country the average wage and the total emissions of GHG.
