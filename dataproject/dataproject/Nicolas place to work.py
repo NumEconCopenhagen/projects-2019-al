@@ -85,10 +85,12 @@ plt.show()
 
 #The translate function
 def translate(code = True, country = True) :
+    """This function take one argument. By default it is the code of the country and return the name of the country. There is the possibility to precise if 
+    the input is a code or country. It it's a country it will return the code."""
     i = 0
     if country == True :
         for a in countrycode :
-            if code != countrycode[i] and i < 35 :
+            if code != countrycode[i] and i < 34 :
                 i = i + 1
             elif code == countrycode[i] :
                 return countries[i]
@@ -96,7 +98,7 @@ def translate(code = True, country = True) :
                 return "miss spelling of the code"
     elif code == True :
         for a in countries :
-            if country != countries[i] and i < 35 :
+            if country != countries[i] and i < 34 :
                 i = i + 1
             elif country == countries[i] :
                 return countrycode[i]
@@ -105,7 +107,7 @@ def translate(code = True, country = True) :
     else :
         return "You must precise code or country"
 
-translate(country = 'Canadas')
+translate('USA')
 
 #The information function
 def information(a,b = 0,variable = True) :
