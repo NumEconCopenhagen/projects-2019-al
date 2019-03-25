@@ -147,3 +147,5 @@ information('AUS', 2010, 'wage')
 information('AUS',variable = 'co2')
 information('AUS', variable ='wage')
 information (['AUS','FRA'], 2010)
+
+#things to do : possibility to add several countries and several years and apply an error message
