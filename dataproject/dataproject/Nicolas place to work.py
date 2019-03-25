@@ -88,29 +88,29 @@ def information(a,b = 0,variable = True) :
     """ This function take two arguments, the country code and the year and return the name of the country the average wage and the total emissions of GHG.
     The country code is the first column in our data base, three letters which represent the country. If the year is not define it will return for all years."""
     x = data_all[data_all["countrycode"] == a]
-#préciser l'année et co2
+#define year and co2
     if b != 0 and variable == 'co2':
         d= x[data_all["year"] == b]
         f = d.loc[:, ["year", "country", "total emissions of GHG"]]
         return f
-#préciser l'année et wage
+#define year and wage
     elif b != 0 and variable == 'wage':
         d= x[data_all["year"] == b]
         g = d.loc[:, ["year", "country", "average wage"]]
         return g
- #précise uniquement co2
+ #define only co2
     elif b == 0 and variable == 'co2':
         d= x[data_all["year"] == b]
         return x.loc[:, ["year", "country", "total emissions of GHG"]]
-#précise uniquement wage X
+#define only wage
     elif b == 0 and variable == 'wage':
         g = x.loc[:, ["year", "country", "average wage"]]
         return x.loc[:, ["year", "country", "average wage"]]
-#précise uniquement l'année
+#define only the year
     elif b != 0 : 
         h = x[data_all["year"] == b]
         return h.loc[:, ["year", "country", "average wage", "total emissions of GHG"]]
-#précise rien
+#nothing define
     else :
         return x.loc[:, ["year", "country", "average wage", "total emissions of GHG"]]
 
