@@ -76,7 +76,17 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #data_all.set_index("year",inplace=True)
 
 
+#statistics
+##
+
 #fooling around with some plots
+
+
+plt.plot(data_all["year"].unique(),data_all.groupby("year")["average wage"].mean())
+plt.plot(data_all["year"].unique(),data_all.groupby("year")["total emissions of GHG"].mean())
+
+
+
 
 plt.scatter(data_all["year"], data_all["total emissions of GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
 plt.show()
