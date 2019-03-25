@@ -10,6 +10,7 @@ import pip
 import pandas as pd
 import pandas_datareader as pdr
 import numpy as np
+import matplotlib.pyplot as plt
 
 #importing our other sheets
 #Here we will clean all the data
@@ -25,16 +26,17 @@ df.columns = [' '.join(col).strip() for col in df.columns.values]
 
 #The countries are not "availeble to grap" so i have manually made a list using excel
 countries = ["Australia","Austria","Belgium","Canada","Chile","Czech Republic","Denmark","Estonia","Finland","France","Germany","Greece","Hungary","Iceland",	
-    "Ireland","Israel","Italy","Japan","Korea","LatPvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic",
-    "Slovenia","Spain","Sweden","Switzerland","Turkey","United Kingdom","United States","OECD - Europe","OECD - Total","Argentina","Brazil","China (People's Republic of)",
-    "Colombia","Costa Rica","India","Indonesia","Russia","South Africa"]
-
+    "Ireland","Israel","Italy","Japan","Korea","Latvia","Lithuania","Luxembourg","Mexico","Netherlands","New Zealand","Norway","Poland","Portugal","Slovak Republic",
+    "Slovenia","Spain","Sweden","Switzerland","United Kingdom","United States"]	
+countrycode = ["AUS", "AUT", "BEL", "CAN", "CHL", "CZE", "DNK", "EST", "FIN", "FRA", "DEU","GRC", "HUN", "ISL", "IRL", "ISR", "ITA", "JPN", 
+    "KOR", "LVA", "LTU", "LUX", "MEX", "NLD", "NZL", "NOR", "POL", "PRT", "SVK", "SVN", "SWE", "ESP", "CHE", "GBR", "USA"]
+ccc = dict(zip(countries,countrycode))
 # I initiate an empty list for the dataset and set the counter to 0
 x = []
 i = 0
 for c in countries:
     for y in df.index.values : 
-        x.append({"country" : c,"year": y,"Total emissions of GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
+        x.append({"country" : c, "countrycode" : ccc[c],"total emissions of GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
         i = i + 1 
         if i > 6 :
             i = 0
@@ -48,12 +50,58 @@ data_wages= pd.read_csv("oecdwages.csv")
 #drop column that we do not need
 drop_these= ["INDICATOR","FREQUENCY","MEASURE","SUBJECT", "Flag Codes"]
 copy = data_wages.drop(drop_these, axis=1, inplace=False)
-copy.rename(columns = {'LOCATION':'Country', 'Value' : 'Average Wage', 'TIME' : 'Year'}, inplace=True)
-copy.head(10)
-copy.loc[copy.Country == 'AUS']
-c = copy["Country"].unique()
-print(c)
-s= df_env["country"].unique()
-print(s)
-len(s)
-len(c)
+copy.rename(columns = {'LOCATION':'countrycode', 'Value' : 'average wage', 'TIME' : 'year'}, inplace=True)
+c = copy["countrycode"].unique()
+
+
+#here i reset the index of the two variables, and sort by the common variable (countrycode). Then i merge by index position 
+left = copy.sort_values("countrycode")
+left = left.reset_index()
+rigth = df_env.sort_values("countrycode")
+rigth = rigth.reset_index()
+data_all = left.merge(rigth,left_index=True,right_index=True)
+
+#this for loop test if all the values of the countrycodes are the same in the same row
+for i in data_all.index.values : 
+    if data_all["countrycode_x"][i]==data_all["countrycode_y"][i] :
+        if i == data_all.index.values[-1] : 
+            print("Done")
+    else :  
+        print("mistake in "+data_all["country"][i])
+
+#I then drop a few columns that are not needed
+drops = ["index_x","index_y","countrycode_y"]
+data_all.drop(drops,axis=1,inplace=True)
+data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
+#data_all.set_index("year",inplace=True)
+
+plt.scatter(data_all["year"], data_all["total emissions of GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
+plt.show()
+
+plt.clf()
+
+plt.plot([1,2,3,4],[4,1,2,3])
+plt.show()
+
+data_all.head()
+
+test= np.array(data_all)
+test[:,2].mean()
+
+data_all["average wage"].mean()
+
+av_w_c= data_all.groupby("countrycode")["average wage"].mean().sort_values()
+
+
+av_e_c= data_all.groupby("country")["total emissions of GHG"].mean()
+
+plt.plot(data_all["country"].unique(),average_wages_countries)
+
+av_w_c.plot.bar()
+plt.show()
+
+type(av_w_c)
+
+
+
+
