@@ -159,16 +159,18 @@ plt.clf
 
 AW_change
 
-
+translate(country='Germany')
 import matplotlib.pyplot as plt
-information('FRA', variable = 'co2')
 united_state_d = information('USA', 2016)
 country1 =united_state_d.loc[:,"emissions_GHG"]
 japan_d = information('JAP', 2016)
 country2 = japan_d.loc[:,"emissions_GHG"]
 germany_d = information("GER", 2016)
 country3 =germany_d.loc[:,"emissions_GHG"]
-others_d = data_all.groupby("")
+
+others_d = data_all[(~data_all["countrycode"].isin(["USA","JAP","DEU"])) & (data_all['year'] == 2016)]["emissions_GHG"]
+others_d= filter(None, others_d)
+sum(others_d)
 chart = [country1, country2, country3]
 
 labels = 'United State', 'Japan', 'Germany', 'Others'
