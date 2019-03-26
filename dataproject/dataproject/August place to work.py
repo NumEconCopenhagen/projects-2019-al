@@ -80,8 +80,9 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 data_all['d_GHG'] = data_all.groupby('countrycode')['total emissions of GHG'].apply(lambda x: x.pct_change())
 data_all['d_aw'] = data_all.groupby('countrycode')['average wage'].apply(lambda x: x.pct_change())
 
+GHG_change = data_all.groupby("year").d_GHG.mean()
 
-
+AW_change = data_all.groupby("year").d_aw.mean()
 
 
 #fooling around with some plots
