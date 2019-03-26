@@ -115,6 +115,20 @@ data_all.groupby("country")
 
 data_all.cov
 
+#plot2 - average wages by country
+av_w_c= data_all.groupby("countrycode")["average wage"].mean().sort_values()
+av_w_c.plot.bar()
+plt.xlabel("countrycode")
+plt.ylabel("average wage in USD")
+plt.show()
 
 
+#plot 3- average emissions by country
+av_e_c= data_all.groupby("country")["emissions_GHG"].mean()
+plt.ylabel("greenhouse gas emissions (thousands of metric tons)")
+plt.xlabel("countrycode")
+av_e_c.plot.bar()
+plt.show()
 
+cov= data_all["average wage"],["total emissions of GHG"]
+cov.cov()
