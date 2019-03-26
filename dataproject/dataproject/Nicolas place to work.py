@@ -36,7 +36,7 @@ x = []
 i = 0
 for c in countries:
     for y in df.index.values : 
-        x.append({"country" : c, "countrycode" : ccc[c],"total emissions of GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
+        x.append({"country" : c, "countrycode" : ccc[c],"emissions_GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
         i = i + 1 
         if i > 6 :
             i = 0
@@ -78,7 +78,7 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 
 #fooling around with some plots
 
-plt.scatter(data_all["year"], data_all["total emissions of GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
+plt.scatter(data_all["year"], data_all["emissions_GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
 plt.show()
 
 ### functions book :
@@ -109,13 +109,14 @@ translate('USA')
 
 #The information function
 def information(a,b = 0,variable = True) :
-    """ This function take two arguments, the country code and the year and return the name of the country the average wage and the total emissions of GHG.
-    The country code is the first column in our data base, three letters which represent the country. If the year is not define it will return for all years."""
+    """ This function take three arguments, the country code, the year (optional the variable) and return the name of the country the average wage and the total emissions of GHG.
+    The country code is the first column in our data base, three letters which represent the country. If the year is not define it will return for all years. If the variable is define
+    it will return only this variable"""
     x = data_all[data_all["countrycode"] == a]
 #define year and co2
     if b != 0 and variable == 'co2':
         d= x[data_all["year"] == b]
-        f = d.loc[:, ["year", "country", "total emissions of GHG"]]
+        f = d.loc[:, ["year", "country", "emissions_GHG"]]
         return f
 #define year and wage
     elif b != 0 and variable == 'wage':
@@ -125,7 +126,7 @@ def information(a,b = 0,variable = True) :
  #define only co2
     elif b == 0 and variable == 'co2':
         d= x[data_all["year"] == b]
-        return x.loc[:, ["year", "country", "total emissions of GHG"]]
+        return x.loc[:, ["year", "country", "emissions_GHG"]]
 #define only wage
     elif b == 0 and variable == 'wage':
         g = x.loc[:, ["year", "country", "average wage"]]
@@ -133,10 +134,10 @@ def information(a,b = 0,variable = True) :
 #define only the year
     elif b != 0 : 
         h = x[data_all["year"] == b]
-        return h.loc[:, ["year", "country", "average wage", "total emissions of GHG"]]
+        return h.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
 #nothing define
     else :
-        return x.loc[:, ["year", "country", "average wage", "total emissions of GHG"]]
+        return x.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
 
 information('FRA')
 information('FRA', 2010)
@@ -144,6 +145,5 @@ information('AUS', 2010, 'co2')
 information('AUS', 2010, 'wage')
 information('AUS',variable = 'co2')
 information('AUS', variable ='wage')
-information (['AUS','FRA'], 2010)
 
 #things to do : possibility to add several countries and several years and apply an error message
