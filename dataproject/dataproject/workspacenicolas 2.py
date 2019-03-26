@@ -158,3 +158,23 @@ plt.show()
 plt.clf
 
 AW_change
+
+
+import matplotlib.pyplot as plt
+
+united_state_d = information('USA', 2016)
+united_state_d.loc[:,"emissions_GHG"]
+japan_d = information('JAP', 2016)
+japan_d.loc = 
+
+labels = 'United State', 'Japan', 'Germany', 'Others'
+sizes = [15, 80, 45, 40]
+colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+
+plt.pie(sizes, labels=labels, colors=colors, 
+        autopct='%1.1f%%', shadow=True, startangle=90)
+
+plt.axis('equal')
+
+plt.savefig('PieChart01.png')
+plt.show()
