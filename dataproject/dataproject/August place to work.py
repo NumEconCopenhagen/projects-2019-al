@@ -76,6 +76,16 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #data_all.set_index("year",inplace=True)
 
 
+#i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
+data_all["d_GHG"] = data_all.groupby("countrycode")["total emissions of GHG"].diff(periods=1)
+data_all["d_aw"] = data_all.groupby("countrycode")["average wage"].diff(periods=1)
+data_all["ld_GHG"] = np.log(data_all.groupby("countrycode")["total emissions of GHG"]).diff(periods=1)
+
+
+
+
+
+
 #fooling around with some plots
 
 plt.scatter(data_all["year"], data_all["total emissions of GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
