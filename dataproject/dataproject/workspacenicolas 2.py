@@ -75,7 +75,7 @@ data_all.drop(drops,axis=1,inplace=True)
 data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #data_all.set_index("year",inplace=True)
 
-data_all['d_GHG'] = data_all.groupby('countrycode')['emissions_GHG'].apply(lambda x: x.pct_change())*100
+data_all['d_GHG'] = data_all.groupby('countrycode')['total emissions of GHG'].apply(lambda x: x.pct_change())*100
 data_all['d_aw'] = data_all.groupby('countrycode')['average wage'].apply(lambda x: x.pct_change())*100
 
 GHG_change = data_all.groupby("year").d_GHG.mean()
@@ -157,4 +157,4 @@ plt.show()
 
 plt.clf
 
-
+AW_change
