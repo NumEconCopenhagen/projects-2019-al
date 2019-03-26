@@ -151,9 +151,14 @@ def information(a,b = 0,variable = True) :
 
 
 #plot 1 - percentage change in co2 and wages over time 
-plt.plot(GHG_change)
-plt.plot(AW_change)
+plt.plot(GHG_change,color="g")
+plt.plot(AW_change,color="b")
+plt.xlabel("Year")
+plt.ylabel("Percentage change")
+plt.legend(["Greenhouse gas emissions","Average wage"])
+plt.axhline(y=0,color="r",linestyle="dashed")
 plt.show()
+
 
 plt.clf
 
