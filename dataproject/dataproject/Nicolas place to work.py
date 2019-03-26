@@ -96,7 +96,7 @@ def translate(code = True, country = True) :
                 return countries[i]
             else :
                 return "miss spelling of the code"
-    elif code == True :
+    else :
         for c in countries :
             if country != countries[i] and i < 34 :
                 i = i + 1
@@ -104,8 +104,6 @@ def translate(code = True, country = True) :
                 return countrycode[i]
             else :
                 return "miss spelling of the country"
-    else :
-        return "You must precise code or country"
 
 translate('USA')
 
