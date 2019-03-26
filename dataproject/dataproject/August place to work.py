@@ -87,7 +87,11 @@ AW_change = data_all.groupby("year").d_aw.mean()
 
 
 #fooling around with some plots
+
 plt.plot(GHG_change)
+plt.plot(AW_change)
+plt.show()
+
 
 plt.scatter(data_all["year"], data_all["total emissions of GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
 plt.show()

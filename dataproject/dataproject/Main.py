@@ -75,6 +75,16 @@ data_all.drop(drops,axis=1,inplace=True)
 data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #data_all.set_index("year",inplace=True)
 
+data_all['d_GHG'] = data_all.groupby('countrycode')['total emissions of GHG'].apply(lambda x: x.pct_change())*100
+data_all['d_aw'] = data_all.groupby('countrycode')['average wage'].apply(lambda x: x.pct_change())*100
+
+GHG_change = data_all.groupby("year").d_GHG.mean()
+
+AW_change = data_all.groupby("year").d_aw.mean()
+
+
+
+
 ### functions book :
 
 #The translate function
@@ -137,14 +147,10 @@ def information(a,b = 0,variable = True) :
 #statistics
 ##
 
-#fooling around with some plots
+#Plots 
 
 
-plt.plot(data_all["year"].unique(),data_all.groupby("year")["average wage"].mean())
-plt.plot(data_all["year"].unique(),data_all.groupby("year")["emissions_GHG"].mean())
-
-
-
-
-plt.scatter(data_all["year"], data_all["emissions_GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
+#plot 1 - percentage change in co2 and wages over time 
+plt.plot(GHG_change)
+plt.plot(AW_change)
 plt.show()
