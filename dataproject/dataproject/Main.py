@@ -36,7 +36,7 @@ x = []
 i = 0
 for c in countries:
     for y in df.index.values : 
-        x.append({"country" : c, "countrycode" : ccc[c],"total emissions of GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
+        x.append({"country" : c, "countrycode" : ccc[c],"emissions_GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
         i = i + 1 
         if i > 6 :
             i = 0
@@ -83,10 +83,10 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 
 
 plt.plot(data_all["year"].unique(),data_all.groupby("year")["average wage"].mean())
-plt.plot(data_all["year"].unique(),data_all.groupby("year")["total emissions of GHG"].mean())
+plt.plot(data_all["year"].unique(),data_all.groupby("year")["emissions_GHG"].mean())
 
 
 
 
-plt.scatter(data_all["year"], data_all["total emissions of GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
+plt.scatter(data_all["year"], data_all["emissions_GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
 plt.show()
