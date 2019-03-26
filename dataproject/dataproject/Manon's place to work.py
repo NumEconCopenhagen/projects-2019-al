@@ -115,7 +115,6 @@ data_all.groupby("country")
 
 data_all.cov
 
-test
 
 
 
