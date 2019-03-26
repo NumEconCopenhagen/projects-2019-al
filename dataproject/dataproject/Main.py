@@ -154,3 +154,7 @@ def information(a,b = 0,variable = True) :
 plt.plot(GHG_change)
 plt.plot(AW_change)
 plt.show()
+
+plt.clf
+
+
