@@ -93,14 +93,27 @@ data_all["average wage"].mean()
 av_w_c= data_all.groupby("countrycode")["average wage"].mean().sort_values()
 
 
-av_e_c= data_all.groupby("country")["total emissions of GHG"].mean()
+av_e_c= data_all.groupby("countrycode")["total emissions of GHG"].mean()
 
-plt.plot(data_all["country"].unique(),average_wages_countries)
+plt.plot(data_all["country"].unique(),av_w_c)
 
 av_w_c.plot.bar()
 plt.show()
 
-type(av_w_c)
+av_e_c.plot.bar()
+plt.show()
+
+
+ 
+plt.show()
+
+data_all.corr()
+
+data_all.describe()
+
+data_all.groupby("country")
+
+data_all.cov
 
 
 

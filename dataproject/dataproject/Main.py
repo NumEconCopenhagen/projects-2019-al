@@ -75,7 +75,7 @@ data_all.drop(drops,axis=1,inplace=True)
 data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #data_all.set_index("year",inplace=True)
 
-data_all['d_GHG'] = data_all.groupby('countrycode')['emissions_GHG'].apply(lambda x: x.pct_change())*100
+data_all['d_GHG'] = data_all.groupby('countrycode')['total emissions of GHG'].apply(lambda x: x.pct_change())*100
 data_all['d_aw'] = data_all.groupby('countrycode')['average wage'].apply(lambda x: x.pct_change())*100
 
 GHG_change = data_all.groupby("year").d_GHG.mean()
@@ -151,10 +151,30 @@ def information(a,b = 0,variable = True) :
 
 
 #plot 1 - percentage change in co2 and wages over time 
-plt.plot(GHG_change)
-plt.plot(AW_change)
+plt.plot(GHG_change,color="g")
+plt.plot(AW_change,color="b")
+plt.xlabel("Year")
+plt.ylabel("Percentage change")
+plt.legend(["Greenhouse gas emissions","Average wage"])
+plt.axhline(y=0,color="r",linestyle="dashed")
 plt.show()
 
+
 plt.clf
+
+#plot2 - average wages by country
+av_w_c= data_all.groupby("countrycode")["average wage"].mean().sort_values()
+av_w_c.plot.bar()
+plt.xlabel("countrycode")
+plt.ylabel("average wage in USD")
+plt.show()
+
+
+#plot 3- average emissions by country
+av_e_c= data_all.groupby("country")["emissions_GHG"].mean()
+plt.ylabel("greenhouse gas emissions (thousands of metric tons)")
+plt.xlabel("countrycode")
+av_e_c.plot.bar()
+plt.show()
 
 
