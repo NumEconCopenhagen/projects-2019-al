@@ -161,17 +161,20 @@ AW_change
 
 
 import matplotlib.pyplot as plt
-
+information('FRA', variable = 'co2')
 united_state_d = information('USA', 2016)
-united_state_d.loc[:,"emissions_GHG"]
+country1 =united_state_d.loc[:,"emissions_GHG"]
 japan_d = information('JAP', 2016)
-japan_d.loc = 
+country2 = japan_d.loc[:,"emissions_GHG"]
+germany_d = information("GER", 2016)
+country3 =germany_d.loc[:,"emissions_GHG"]
+others_d = data_all.groupby("")
+chart = [country1, country2, country3]
 
 labels = 'United State', 'Japan', 'Germany', 'Others'
-sizes = [15, 80, 45, 40]
 colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
 
-plt.pie(sizes, labels=labels, colors=colors, 
+plt.pie(chart, labels=labels, colors=colors, 
         autopct='%1.1f%%', shadow=True, startangle=90)
 
 plt.axis('equal')
