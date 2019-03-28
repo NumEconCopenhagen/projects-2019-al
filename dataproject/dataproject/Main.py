@@ -144,12 +144,6 @@ def information(a,b = 0,variable = True) :
         return x.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
 
 
-#statistics
-##
-
-#Plots 
-
-
 #plot 1 - percentage change in co2 and wages over time 
 plt.plot(GHG_change,color="g")
 plt.plot(AW_change,color="b")

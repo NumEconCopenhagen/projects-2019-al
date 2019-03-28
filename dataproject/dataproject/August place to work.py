@@ -97,8 +97,10 @@ plt.legend(["Greenhouse gas emissions","Average wage"])
 plt.axhline(y=0,color="r",linestyle="dashed")
 plt.show()
 
-def get_con(x == "Australia") : 
-    print(x) 
+
+def get_con(x):
+    print(x)
     return x
+
 
 widgets.interact(get_con,x=data_all["country"].unique())
