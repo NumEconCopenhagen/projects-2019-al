@@ -11,6 +11,7 @@ import pandas as pd
 import pandas_datareader as pdr
 import numpy as np
 import matplotlib.pyplot as plt
+import ipywidgets as widgets
 
 #importing our other sheets
 #Here we will clean all the data
@@ -96,7 +97,8 @@ plt.legend(["Greenhouse gas emissions","Average wage"])
 plt.axhline(y=0,color="r",linestyle="dashed")
 plt.show()
 
+def get_con(x == "Australia") : 
+    print(x) 
+    return x
 
-
-plt.scatter(data_all["year"], data_all["total emissions of GHG"] , s=data_all["average wage"]/50 , alpha=0.6, edgecolors="white", linewidth=2)
-plt.show()
+widgets.interact(get_con,x=data_all["country"].unique())
