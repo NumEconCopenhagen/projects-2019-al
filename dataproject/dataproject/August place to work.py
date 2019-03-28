@@ -37,7 +37,7 @@ x = []
 i = 0
 for c in countries:
     for y in df.index.values : 
-        x.append({"country" : c, "countrycode" : ccc[c],"total emissions of GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
+        x.append({"country" : c, "countrycode" : ccc[c],"emissions_GHG" : df[c+" "+"Greenhouse gases Total  emissions excluding LULUCF"][i]})
         i = i + 1 
         if i > 6 :
             i = 0
@@ -78,7 +78,7 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 
 
 #i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
-data_all['d_GHG'] = data_all.groupby('countrycode')['total emissions of GHG'].apply(lambda x: x.pct_change())*100
+data_all['d_GHG'] = data_all.groupby('countrycode')['emissions_GHG'].apply(lambda x: x.pct_change())*100
 data_all['d_aw'] = data_all.groupby('countrycode')['average wage'].apply(lambda x: x.pct_change())*100
 
 GHG_change = data_all.groupby("year").d_GHG.mean()
@@ -98,9 +98,11 @@ plt.axhline(y=0,color="r",linestyle="dashed")
 plt.show()
 
 
-def get_con(x):
-    print(x)
+def get_con(x="Australia"):
+    print("Country: "+x)
+    print("Mean of Greenhouse gas emissions:" , round(data_all[data_all["country"]==x]["emissions_GHG"].mean(),2))
+    print("Mean of average wages:" , round(data_all[data_all["country"]==x]["average wage"].mean(),2))
     return x
 
-
 widgets.interact(get_con,x=data_all["country"].unique())
+
