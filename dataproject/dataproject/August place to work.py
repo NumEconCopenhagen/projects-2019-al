@@ -124,28 +124,18 @@ def information(a,b = 0,variable = True) :
         return x.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
 
 
-def translate(code = True, country = True) :
+def translate(code = True, countrycode = True) :
     """This function take one argument. By default it is the code of the country and return the name of the country. There is the possibility to precise if 
     the input is a code or country. It it's a country it will return the code."""
     i = 0
-    if country == True :
-        for c in countrycode :
-            if code != countrycode[i] and i < 34 :
-                i = i + 1
-            elif code == countrycode[i] :
-                return countries[i]
-            else :
-                return "miss spelling of the code"
-    else :
-        for c in countries :
-            if country != countries[i] and i < 34 :
-                i = i + 1
-            elif country == countries[i] :
-                return countrycode[i]
-            else :
-                return "miss spelling of the country"
+    if countrycode == True :
+        return(data_all[data_all["countrycode"]==code]["country"][2010])
+    elif countrycode == False :
+        return(data_all[data_all["country"]==code]["countrycode"][2010])
+    else : 
+        return("check you'r spelling")
 
-translate('USA')
+translate("United States",countrycode=False)
 #fooling around with some plots
 
 plt.plot(GHG_change,color="g")
@@ -156,13 +146,14 @@ plt.legend(["Greenhouse gas emissions","Average wage"])
 plt.axhline(y=0,color="r",linestyle="dashed")
 plt.show()
 
+information(translate("Denmark",countrycode=False))["emissions_GHG"].mean()
 
-
+x = translate("DNK")
 #I would like to use the information function, but this requeres that the translate function works for country -> countrycode which it does not now
 def get_con(x="Australia"):
     print("Country: "+x)
-    print("Mean of Greenhouse gas emissions:" , round(data_all[data_all["country"]==x]["emissions_GHG"].mean(),2))
-    print("Mean of average wages:" , round(data_all[data_all["country"]==x]["average wage"].mean(),2))
+    print("Mean of Greenhouse gas emissions:" , round(information(translate(x,countrycode=False))["emissions_GHG"].mean(),2))  
+    print("Mean of average wages:" , round(information(translate(x,countrycode=False))["average wage"].mean(),2))
 
     plt.plot(data_all[data_all["country"]==x]["d_GHG"],color="g")
     plt.plot(data_all[data_all["country"]==x]["d_aw"],color="b")
