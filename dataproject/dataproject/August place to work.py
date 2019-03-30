@@ -75,6 +75,8 @@ drops = ["index_x","index_y","countrycode_y"]
 data_all.drop(drops,axis=1,inplace=True)
 data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #data_all.set_index("year",inplace=True)
+data_all = data_all.sort_values(by=["countrycode","year"])
+data_all = data_all.reset_index(drop=True)
 
 
 #i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
@@ -87,6 +89,60 @@ AW_change = data_all.groupby("year").d_aw.mean()
 
 
 
+def information(a,b = 0,variable = True) :
+    """ This function take three arguments, the country code, the year (optional the variable) and return the name of the country the average wage and the total emissions of GHG.
+    The country code is the first column in our data base, three letters which represent the country. If the year is not define it will return for all years. If the variable is define
+    it will return only this variable"""
+    x = data_all[data_all["countrycode"] == a]
+#define year and co2
+    if b != 0 and variable == 'co2':
+        d= x[data_all["year"] == b]
+        f = d.loc[:, ["year", "country", "emissions_GHG"]]
+        return f
+#define year and wage
+    elif b != 0 and variable == 'wage':
+        d= x[data_all["year"] == b]
+        g = d.loc[:, ["year", "country", "average wage"]]
+        return g
+ #define only co2
+    elif b == 0 and variable == 'co2':
+        d= x[data_all["year"] == b]
+        return x.loc[:, ["year", "country", "emissions_GHG"]]
+#define only wage
+    elif b == 0 and variable == 'wage':
+        g = x.loc[:, ["year", "country", "average wage"]]
+        return x.loc[:, ["year", "country", "average wage"]]
+#define only the year
+    elif b != 0 : 
+        h = x[data_all["year"] == b]
+        return h.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
+#nothing define
+    else :
+        return x.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
+
+
+def translate(code = True, country = True) :
+    """This function take one argument. By default it is the code of the country and return the name of the country. There is the possibility to precise if 
+    the input is a code or country. It it's a country it will return the code."""
+    i = 0
+    if country == True :
+        for c in countrycode :
+            if code != countrycode[i] and i < 34 :
+                i = i + 1
+            elif code == countrycode[i] :
+                return countries[i]
+            else :
+                return "miss spelling of the code"
+    else :
+        for c in countries :
+            if country != countries[i] and i < 34 :
+                i = i + 1
+            elif country == countries[i] :
+                return countrycode[i]
+            else :
+                return "miss spelling of the country"
+
+translate('USA')
 #fooling around with some plots
 
 plt.plot(GHG_change,color="g")
@@ -98,10 +154,21 @@ plt.axhline(y=0,color="r",linestyle="dashed")
 plt.show()
 
 
+
+#I would like to use the information function, but this requeres that the translate function works for country -> countrycode which it does not now
 def get_con(x="Australia"):
     print("Country: "+x)
     print("Mean of Greenhouse gas emissions:" , round(data_all[data_all["country"]==x]["emissions_GHG"].mean(),2))
     print("Mean of average wages:" , round(data_all[data_all["country"]==x]["average wage"].mean(),2))
+
+    plt.plot(data_all[data_all["country"]==x]["emissions_GHG"],color="g")
+    plt.plot(data_all[data_all["country"]==x]["average wage"],color="b")
+    lt.xlabel("Year")
+    plt.ylabel("Percentage change")
+    plt.legend(["Greenhouse gas emissions","Average wage"])
+    plt.axhline(y=0,color="r",linestyle="dashed")
+    plt.show()
+
     return x
 
 widgets.interact(get_con,x=data_all["country"].unique())
