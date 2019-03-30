@@ -74,10 +74,11 @@ for i in data_all.index.values :
 drops = ["index_x","index_y","countrycode_y"]
 data_all.drop(drops,axis=1,inplace=True)
 data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
-#data_all.set_index("year",inplace=True)
+
+#I make sure that the dataset is sortet and that the index is year
 data_all = data_all.sort_values(by=["countrycode","year"])
 data_all = data_all.reset_index(drop=True)
-
+data_all.set_index("year",inplace=True)
 
 #i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
 data_all['d_GHG'] = data_all.groupby('countrycode')['emissions_GHG'].apply(lambda x: x.pct_change())*100
@@ -161,9 +162,10 @@ def get_con(x="Australia"):
     print("Mean of Greenhouse gas emissions:" , round(data_all[data_all["country"]==x]["emissions_GHG"].mean(),2))
     print("Mean of average wages:" , round(data_all[data_all["country"]==x]["average wage"].mean(),2))
 
-    plt.plot(data_all[data_all["country"]==x]["emissions_GHG"],color="g")
-    plt.plot(data_all[data_all["country"]==x]["average wage"],color="b")
-    lt.xlabel("Year")
+    plt.plot(data_all[data_all["country"]==x]["d_GHG"],color="g")
+    plt.plot(data_all[data_all["country"]==x]["d_aw"],color="b")
+    plt.xticks(labels=data_all["year"].unique())
+    plt.xlabel("Year")
     plt.ylabel("Percentage change")
     plt.legend(["Greenhouse gas emissions","Average wage"])
     plt.axhline(y=0,color="r",linestyle="dashed")
