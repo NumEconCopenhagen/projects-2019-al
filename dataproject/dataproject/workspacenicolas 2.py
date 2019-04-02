@@ -79,7 +79,7 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #I make sure that the dataset is sortet and that the index is year
 data_all = data_all.sort_values(by=["countrycode","year"])
 data_all = data_all.reset_index(drop=True)
-data_all.set_index("year",inplace=True)
+data_all.set_index("year")
 
 
 #i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
@@ -200,17 +200,16 @@ germany_d = information("GER", 2016)
 country3 =germany_d.loc[:,"emissions_GHG"]
 
 others_d = data_all[(~data_all["countrycode"].isin(["USA","JAP","DEU"])) & (data_all['year'] == 2016)]["emissions_GHG"]
-others_d= filter(None, others_d)
-sum(others_d)
-chart = [country1, country2, country3]
+others = np.nansum(others_d)
+chart = [country1, country2, country3, others]
 
-labels = 'United State', 'Japan', 'Germany', 'Others'
+labels = ['United State', 'Japan', 'Germany', 'Others']
 colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
 
-plt.pie(chart, labels=labels, colors=colors, 
-        autopct='%1.1f%%', shadow=True, startangle=90)
+nico = plt.subplots()
+nico.pie(chart, explode= 0, labels=labels, colors=colors, autopct='%1.1f%%',  shadow=True, startangle=90)
 
-plt.axis('equal')
-
+nico.axis('equal')
+nico.show()
 plt.savefig('PieChart01.png')
-plt.show()
+
