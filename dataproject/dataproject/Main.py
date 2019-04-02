@@ -79,7 +79,6 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #I make sure that the dataset is sortet and that the index is year
 data_all = data_all.sort_values(by=["countrycode","year"])
 data_all = data_all.reset_index(drop=True)
-data_all.set_index("year")
 
 
 #i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
@@ -131,14 +130,20 @@ def translate(code = True, countrycode = True):
     """
     i = 0
     if countrycode == True :
-        return(data_all[data_all["countrycode"]==code]["country"][2010])
+        c = str(data_all[data_all["countrycode"]==code]["country"].unique())
+        c = c.replace("['","")
+        c = c.replace("']","")
+        return(c)
     elif countrycode == False :
-        return(data_all[data_all["country"]==code]["countrycode"][2010])
+        c = str(data_all[data_all["country"]==code]["countrycode"].unique())
+        c = c.replace("['","")
+        c = c.replace("']","")
+        return(c)
     else : 
         return("check you'r spelling")
 
 translate("United States",countrycode=False)
-
+translate("USA")
 
 def get_con(x="Australia"):
     print("Country: "+x)
