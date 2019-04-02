@@ -92,10 +92,11 @@ AW_change = data_all.groupby("year").d_aw.mean()
 
 
 
-def information(a,b = 0,variable = True) :
-    """ This function take three arguments, the country code, the year (optional the variable) and return the name of the country the average wage and the total emissions of GHG.
+def information(a,b = 0,variable = True):
+    """This function take three arguments, the country code, the year (optional the variable) and return the name of the country the average wage and the total emissions of GHG.
     The country code is the first column in our data base, three letters which represent the country. If the year is not define it will return for all years. If the variable is define
-    it will return only this variable"""
+    it will return only this variable
+    """
     x = data_all[data_all["countrycode"] == a]
 #define year and co2
     if b != 0 and variable == 'co2':
@@ -124,9 +125,10 @@ def information(a,b = 0,variable = True) :
         return x.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
 
 
-def translate(code = True, countrycode = True) :
+def translate(code = True, countrycode = True):
     """This function take one argument. By default it is the code of the country and return the name of the country. There is the possibility to precise if 
-    the input is a code or country. It it's a country it will return the code."""
+    the input is a code or country. It it's a country it will return the code.
+    """
     i = 0
     if countrycode == True :
         return(data_all[data_all["countrycode"]==code]["country"][2010])
