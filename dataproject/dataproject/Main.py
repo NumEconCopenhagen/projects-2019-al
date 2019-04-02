@@ -193,4 +193,24 @@ av_e_c.plot.bar()
 plt.show()
 
 
-information("USA")
+#chart plot
+united_state_d = information('USA', 2016)
+country1 = float(united_state_d.loc[:,"emissions_GHG"])
+japan_d = information('JPN', 2016)
+country2 = float(japan_d.loc[:,"emissions_GHG"])
+germany_d = information("DEU", 2016)
+country3 = float(germany_d.loc[:,"emissions_GHG"])
+others_d = data_all[(~data_all["countrycode"].isin(["USA","JAP","DEU"])) & (data_all['year'] == 2016)]["emissions_GHG"]
+others = float(np.nansum(others_d))
+type(others)
+chart = [country1, country2, country3, others]
+len(colors)
+labels = 'United State', 'Japan', 'Germany', 'Others'
+colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+exp = [0.15 , 0, 0, 0]
+
+fig1, chartg = plt.subplots()
+chartg.pie(chart, explode=exp , labels=labels, colors=colors, autopct='%1.1f%%',  shadow=True, startangle=90)
+
+chartg.axis('equal')
+plt.show()
