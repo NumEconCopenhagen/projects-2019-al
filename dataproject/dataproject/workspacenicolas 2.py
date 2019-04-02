@@ -204,7 +204,7 @@ chart = [country1, country2, country3, others]
 len(colors)
 labels = 'United State', 'Japan', 'Germany', 'Others'
 colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
-exp = [0.1 , 0, 0, 0]
+exp = [0.15 , 0, 0, 0]
 
 fig1, nico = plt.subplots()
 nico.pie(chart, explode=exp , labels=labels, colors=colors, autopct='%1.1f%%',  shadow=True, startangle=90)
