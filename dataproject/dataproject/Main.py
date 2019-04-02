@@ -130,14 +130,20 @@ def translate(code = True, countrycode = True):
     """
     i = 0
     if countrycode == True :
-        return(data_all[data_all["countrycode"]==code]["country"][2010])
+        c = str(data_all[data_all["countrycode"]==code]["country"].unique())
+        c = c.replace("['","")
+        c = c.replace("']","")
+        return(c)
     elif countrycode == False :
-        return(data_all[data_all["country"]==code]["countrycode"][2010])
+        c = str(data_all[data_all["country"]==code]["countrycode"].unique())
+        c = c.replace("['","")
+        c = c.replace("']","")
+        return(c)
     else : 
         return("check you'r spelling")
 
 translate("United States",countrycode=False)
-
+translate("USA")
 
 def get_con(x="Australia"):
     print("Country: "+x)
