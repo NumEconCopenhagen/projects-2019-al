@@ -88,26 +88,16 @@ AW_change = data_all.groupby("year").d_aw.mean()
 ### functions book :
 
 #The translate function
-def translate(code = True, country = True) :
+def translate(code = True, countrycode = True) :
     """This function take one argument. By default it is the code of the country and return the name of the country. There is the possibility to precise if 
     the input is a code or country. It it's a country it will return the code."""
     i = 0
-    if country == True :
-        for c in countrycode :
-            if code != countrycode[i] and i < 34 :
-                i = i + 1
-            elif code == countrycode[i] :
-                return countries[i]
-            else :
-                return "miss spelling of the code"
-    else :
-        for c in countries :
-            if country != countries[i] and i < 34 :
-                i = i + 1
-            elif country == countries[i] :
-                return countrycode[i]
-            else :
-                return "miss spelling of the country"
+    if countrycode == True :
+        return(data_all[data_all["countrycode"]==code]["country"][2010])
+    elif countrycode == False :
+        return(data_all[data_all["country"]==code]["countrycode"][2010])
+    else : 
+        return("check you'r spelling")
 
 translate('USA')
 
