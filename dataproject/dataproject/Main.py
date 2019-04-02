@@ -79,7 +79,7 @@ data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #I make sure that the dataset is sortet and that the index is year
 data_all = data_all.sort_values(by=["countrycode","year"])
 data_all = data_all.reset_index(drop=True)
-data_all.set_index("year",inplace=True)
+data_all.set_index("year")
 
 
 #i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
@@ -188,3 +188,4 @@ av_e_c.plot.bar()
 plt.show()
 
 
+information("USA")
