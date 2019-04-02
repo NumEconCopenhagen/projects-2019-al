@@ -195,20 +195,19 @@ united_state_d = information('USA', 2016)
 country1 = float(united_state_d.loc[:,"emissions_GHG"])
 japan_d = information('JPN', 2016)
 country2 = float(japan_d.loc[:,"emissions_GHG"])
-germany_d = information("GER", 2016)
+germany_d = information("DEU", 2016)
 country3 = float(germany_d.loc[:,"emissions_GHG"])
-print(float(country1))
 others_d = data_all[(~data_all["countrycode"].isin(["USA","JAP","DEU"])) & (data_all['year'] == 2016)]["emissions_GHG"]
-others = np.nansum(others_d)
-chart = [country1, country2, Country3, others]
-print(chart)
-labels = ['United State', 'Japan', 'Germany', 'Others']
+others = float(np.nansum(others_d))
+type(others)
+chart = [country1, country2, country3, others]
+len(colors)
+labels = 'United State', 'Japan', 'Germany', 'Others'
 colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
+exp = [0.1 , 0, 0, 0]
 
 fig1, nico = plt.subplots()
-nico.pie(chart, explode= 0, labels=labels, colors=colors, autopct='%1.1f%%',  shadow=True, startangle=90)
+nico.pie(chart, explode=exp , labels=labels, colors=colors, autopct='%1.1f%%',  shadow=True, startangle=90)
 
 nico.axis('equal')
-nico.show()
-plt.savefig('PieChart01.png')
-
+plt.show()
