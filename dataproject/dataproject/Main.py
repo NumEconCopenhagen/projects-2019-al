@@ -11,6 +11,7 @@ import pandas as pd
 import pandas_datareader as pdr
 import numpy as np
 import matplotlib.pyplot as plt
+import ipywidgets as widgets
 
 #importing our other sheets
 #Here we will clean all the data
@@ -75,7 +76,14 @@ data_all.drop(drops,axis=1,inplace=True)
 data_all.rename(columns ={"countrycode_x":"countrycode"},inplace=True)
 #data_all.set_index("year",inplace=True)
 
-data_all['d_GHG'] = data_all.groupby('countrycode')['total emissions of GHG'].apply(lambda x: x.pct_change())*100
+#I make sure that the dataset is sortet and that the index is year
+data_all = data_all.sort_values(by=["countrycode","year"])
+data_all = data_all.reset_index(drop=True)
+data_all.set_index("year",inplace=True)
+
+
+#i make to lagged variables and take the log of them (this is almost like use percentage change in GHG and average wage)
+data_all['d_GHG'] = data_all.groupby('countrycode')['emissions_GHG'].apply(lambda x: x.pct_change())*100
 data_all['d_aw'] = data_all.groupby('countrycode')['average wage'].apply(lambda x: x.pct_change())*100
 
 GHG_change = data_all.groupby("year").d_GHG.mean()
@@ -84,34 +92,6 @@ AW_change = data_all.groupby("year").d_aw.mean()
 
 
 
-
-### functions book :
-
-#The translate function
-def translate(code = True, country = True) :
-    """This function take one argument. By default it is the code of the country and return the name of the country. There is the possibility to precise if 
-    the input is a code or country. It it's a country it will return the code."""
-    i = 0
-    if country == True :
-        for c in countrycode :
-            if code != countrycode[i] and i < 34 :
-                i = i + 1
-            elif code == countrycode[i] :
-                return countries[i]
-            else :
-                return "miss spelling of the code"
-    else :
-        for c in countries :
-            if country != countries[i] and i < 34 :
-                i = i + 1
-            elif country == countries[i] :
-                return countrycode[i]
-            else :
-                return "miss spelling of the country"
-
-translate('USA')
-
-#The information function
 def information(a,b = 0,variable = True) :
     """ This function take three arguments, the country code, the year (optional the variable) and return the name of the country the average wage and the total emissions of GHG.
     The country code is the first column in our data base, three letters which represent the country. If the year is not define it will return for all years. If the variable is define
@@ -142,6 +122,40 @@ def information(a,b = 0,variable = True) :
 #nothing define
     else :
         return x.loc[:, ["year", "country", "average wage", "emissions_GHG"]]
+
+
+def translate(code = True, countrycode = True) :
+    """This function take one argument. By default it is the code of the country and return the name of the country. There is the possibility to precise if 
+    the input is a code or country. It it's a country it will return the code."""
+    i = 0
+    if countrycode == True :
+        return(data_all[data_all["countrycode"]==code]["country"][2010])
+    elif countrycode == False :
+        return(data_all[data_all["country"]==code]["countrycode"][2010])
+    else : 
+        return("check you'r spelling")
+
+translate("United States",countrycode=False)
+
+
+def get_con(x="Australia"):
+    print("Country: "+x)
+    print("Mean of Greenhouse gas emissions:" , round(information(translate(x,countrycode=False))["emissions_GHG"].mean(),2))  
+    print("Mean of average wages:" , round(information(translate(x,countrycode=False))["average wage"].mean(),2))
+
+    plt.plot(data_all[data_all["country"]==x]["d_GHG"],color="g")
+    plt.plot(data_all[data_all["country"]==x]["d_aw"],color="b")
+    plt.xlabel("Year")
+    plt.ylabel("Percentage change")
+    plt.legend(["Greenhouse gas emissions","Average wage"])
+    plt.axhline(y=0,color="r",linestyle="dashed")
+    plt.show()
+
+    return 
+
+widgets.interact(get_con,x=data_all["country"].unique())
+
+
 
 
 #plot 1 - percentage change in co2 and wages over time 
