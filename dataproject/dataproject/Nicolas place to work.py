@@ -149,3 +149,7 @@ information('AUS', variable ='wage')
 #things to do : possibility to add several countries and several years and apply an error message
 
 data_all
+
+
+type('variable')
+information('FRA')
