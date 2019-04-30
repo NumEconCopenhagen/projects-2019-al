@@ -16,7 +16,9 @@ pi2 = sm.symbols('pi_2')
 p = sm.symbols('p')
 p1 = (a-(q1+q2)*q1)
 p2 = (a-(q1+q2)*q2)
-pi1 =(p*q1-c1*q1)
+pi1 =(p1*q1-c1*q1)
 pi2 = (p2*q2-c2*q2)
+
+
 
 
