@@ -16,12 +16,30 @@ pi2 = sm.symbols('pi_2')
 p = sm.symbols('p')
 
 #Defining relations between symbols
-p1 = (a-(q1+q2)*q1)
-p2 = (a-(q1+q2)*q2)
-pi1 =(p1*q1-c1*q1)
-pi2 = (p2*q2-c2*q2)
+objective = q1*(p*(q1+q2)-c1)
+objective
+
+more = sm.Eq(q1*(p*(q1+q2)-c1),pi1)
+more
+
+lala = sm.solve(more,q2)
+lala
+
+objective_subs = objective.subs(q2,lala[0])
+objective_subs
+
+foc = sm.diff(objective_subs,q1)
+foc
 
 
+x = sm.Eq(foc,0)
+sm.solve(x,q1)
+solution = sm.solve(x,q1)
+solution
+
+
+firm_diff_q1 = sm.diff(objective,q1)
+firm_diff_q1
 
 
 
