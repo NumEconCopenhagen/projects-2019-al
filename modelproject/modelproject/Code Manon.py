@@ -12,8 +12,8 @@ b = sm.symbols('b')
 pi1 = sm.symbols('pi_1')
 pi2 = sm.symbols('pi_2')
 p = sm.symbols('p')
-p1 = (a-b*(q1+q2))
-p2 = (a-b*(q1+q2))
+p1 = (a-(q1+q2))
+p2 = (a-(q1+q2))
 pi1 =(p1*q1-c*q1)
 pi2 = (p2*q2-c*q2)
 
@@ -34,16 +34,12 @@ sol2
 #sol1 and sol2 constitute the reaction functions of the two firms.
 #Now we substitute for the optimal quantities:
 
-sol1_subs = foc1.subs(q2,sol2)
+sol1_subs = sol1.subs(q2,sol2)
 sol1_subs
 
 sol1_subs_solve = sm.solve(sm.Eq(sol1_subs,0),q1)
 sol1_subs_solve
 
-# Calculate equilibrium prices and profits:
 
-p = p1.subs([(q1,sol1_subs_solve[0]), (q2, sol1_subs_solve[0])])
-p
 
-pi = pi1.subs([(p1,p), (q1,sol1_subs_solve[0])])
-pi
+
