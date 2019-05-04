@@ -57,14 +57,13 @@ print(pi1(3,4,5))
 
 def p1(a,b,q1,q2):
     
-    if (a-b*(q1+q2)) > 0
-    (a-b*(q1+q2))= (a-b*(q1+q2))
-
-        else:
-        (a-b*(q1+q2)) "price can't be negative"
-
+    if (a-b*(q1+q2)) > 0:
         return (a-b*(q1+q2))
 
+    else:
+        return("price can't be negative")
+
+       
 print(p1(1,1,1,1))
 
 
