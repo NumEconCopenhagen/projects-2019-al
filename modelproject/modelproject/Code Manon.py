@@ -61,7 +61,7 @@ def p1(a,b,q1,q2):
     (a-b*(q1+q2))= (a-b*(q1+q2))
 
         else:
-        (a-b*(q1+q2))= "price can't be negative"
+        (a-b*(q1+q2)) "price can't be negative"
 
         return (a-b*(q1+q2))
 
