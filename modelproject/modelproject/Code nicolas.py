@@ -12,8 +12,8 @@ b = sm.symbols('b')
 pi1 = sm.symbols('pi_1')
 pi2 = sm.symbols('pi_2')
 p = sm.symbols('p')
-p1 = (a-b*(q1+q2))
-p2 = (a-b*(q1+q2))
+p1 = (a-b*(1+q2))
+p2 = (a-b*(q1+q2)
 pi1 =(p1*q1-c*q1)
 pi2 = (p2*q2-c*q2)
 
@@ -39,4 +39,7 @@ sol1_subs
 
 sol1_subs_solve = sm.solve(sm.Eq(sol1_subs,0),q1)
 sol1_subs_solve
+
+
+# Calculate equilibrium prices and profits:
 
