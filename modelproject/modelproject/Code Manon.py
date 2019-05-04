@@ -45,4 +45,5 @@ sol1_subs_solve
 p = p1.subs([(q1,sol1_subs_solve[0]), (q2, sol1_subs_solve[0])])
 p
 
-
+pi = pi1.subs([(p1,p), (q1,sol1_subs_solve[0])])
+pi
