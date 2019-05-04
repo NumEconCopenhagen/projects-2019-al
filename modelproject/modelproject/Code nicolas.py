@@ -62,7 +62,6 @@ from scipy import linalg
 from scipy import optimize
 from scipy import interpolate
 
-%matplotlib inline
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
