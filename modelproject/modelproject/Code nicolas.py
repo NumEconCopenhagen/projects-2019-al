@@ -57,38 +57,3 @@ f12 = sm.diff(pi1,q1,q2)
 f21 = sm.diff(pi1,q2,q1)
 f22 = sm.diff(pi1,q2,q2)
 sm.Matrix([[f11,f12],[f21,f22]])
-
-from scipy import linalg
-from scipy import optimize
-from scipy import interpolate
-
-
-
-bf = sm.lambdify((q1,q2),pi1)
-
-# a. grids
-x1_vec = np.linspace(-2,2,500)
-x2_vec = np.linspace(-2,2,500)
-x1_grid,x2_grid = np.meshgrid(x1_vec,x2_vec,indexing='ij')
-f_grid = bf(x1_grid,x2_grid)
-
-# b. main
-fig = plt.figure()
-ax = fig.add_subplot(1,1,1,projection='3d')
-cs = ax.plot_surface(x1_grid,x2_grid,f_grid,cmap=cm.jet)
-
-# c. add labels
-ax.set_xlabel('$q_1$')
-ax.set_ylabel('$q_2$')
-ax.set_zlabel('$pi$')
-
-# d. invert xaxis
-ax.invert_xaxis()
-
-# e. remove background
-ax.xaxis.pane.fill = False
-ax.yaxis.pane.fill = False
-ax.zaxis.pane.fill = False
-
-# f. add colorbar
-fig.colorbar(cs);
