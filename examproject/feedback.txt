@@ -7,7 +7,7 @@ Team Spirit - https://github.com/NumEconCopenhagen/projects-2019-team-spirit/iss
 MEC - https://github.com/NumEconCopenhagen/projects-2019-mec/issues/7
 
 --------
-jnr691 
+hlm375
 --------
 chx - https://github.com/NumEconCopenhagen/projects-2019-chx/issues/2
 raj - https://github.com/NumEconCopenhagen/projects-2019-raj/issues/6
@@ -15,7 +15,7 @@ abs - https://github.com/NumEconCopenhagen/projects-2019-abs/issues/8
 den usynlige fod - https://github.com/NumEconCopenhagen/projects-2019-den-usynlige-fod/issues/8
 
 --------
-hlm375
+jnr691
 --------
 dataproject - Nikita Jonas Allan - https://github.com/NumEconCopenhagen/projects-2019-nikita-jonas-allan/issues/3?fbclid=IwAR3M11yGMs82kFRLMY-STa9itoF3P2y_OW7gWoS-xl95XpZauUklyeVTLr4
 dataproject - TeamGhita - https://github.com/NumEconCopenhagen/projects-2019-teamghita/issues/4?fbclid=IwAR1oTxhVx5UcvcbK_Y7GL5Z70Zl1GVD16QDg6JzTZlQ-2HGa2aKPb4jHlKY
